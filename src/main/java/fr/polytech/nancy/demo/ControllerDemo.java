@@ -55,5 +55,30 @@ public class ControllerDemo {
   }
 
 
+  // petit moteur de recherche textuel .....
+    @GetMapping(value = "/chercher/{s}")
+    public List<Product> chercherDesProduits(@PathVariable  String s){
+        return  this.productDao.findByDesignationLike("%"+ s + "%");
+    }
+
+
+    // méthode pour supprimer un produit sachant son code ....
+    @DeleteMapping(value = "/supprimer/{code}")
+    public void supprimer(@PathVariable  int code){
+        this.productDao.deleteById(code);
+    }
+
+
+    // écriture des requête "à la main" ....
+    // Exercice : récrire la méthode qui permet de renvoyer tous les produits dont le prix est supérieur à une certaine
+    // valeur ?
+
+    @GetMapping(value = "/chers/{prix}")
+    public List<Product> afficherChers(@PathVariable double prixtest){
+    return this.productDao.renvoyerProduitChers(prixtest);
+    }
+
+
+
 
 }
